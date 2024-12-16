@@ -1,3 +1,4 @@
 public class City {
-    // şehirler olacak
+    private int cityCount;
+    private String cityName;
 }
