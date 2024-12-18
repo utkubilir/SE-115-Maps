@@ -12,3 +12,4 @@ public class Main {
         try {
             Path path = Paths.get(filePath);
             Scanner fileScanner = new Scanner(path.toFile());
+             int cityCount = Integer.parseInt(fileScanner.nextLine().trim());
