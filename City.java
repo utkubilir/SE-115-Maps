@@ -1,4 +1,12 @@
 public class City {
-    private int cityCount;
-    private String cityName;
+    private String name;
+
+    public City(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
+

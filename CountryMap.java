@@ -7,7 +7,7 @@ public class CountryMap {
         cities = new City[cityCount];
         timeMatrix = new int[cityCount][cityCount];
 
-        
+
         for (int i = 0; i < cityCount; i++) {
             for (int j = 0; j < cityCount; j++) {
                 if (i == j) {
@@ -18,4 +18,37 @@ public class CountryMap {
             }
         }
     }
+    public void setCity(int index, String name) {
+        cities[index] = new City(name);
     }
+    public void addRoute(String city1, String city2, int time) {
+        int index1 = findCityIndex(city1);
+        int index2 = findCityIndex(city2);
+
+        if (index1 == -1 || index2 == -1) {
+            System.err.println("Error: Invalid city name(s) - " + city1 + " or " + city2);
+        } else {
+            timeMatrix[index1][index2] = time;
+            timeMatrix[index2][index1] = time;
+        }
+    }
+    public int findCityIndex(String name) {
+        for (int i = 0; i < cityCount; i++) {
+            if (cities[i].getName().equals(name)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int[][] getTimeMatrix() {
+        return timeMatrix;
+    }
+
+    public City[] getCities() {
+        return cities;
+    }
+
+    public int getCityCount() {
+        return cityCount;
+    }
+}
