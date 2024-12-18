@@ -1,14 +1,15 @@
 public class CountryMap {
     private int cityCount;         
     private City[] cities;
-    private int[][] timeMatrix;           
+    private int[][] timeMatrix; 
+
     public CountryMap(int cityCount) {
         this.cityCount = cityCount;
         cities = new City[cityCount];
         timeMatrix = new int[cityCount][cityCount];
 
 
-        for (int i = 0; i < cityCount; i++) {
+        for (int i = 0; i < cityCount; i++) {// İki şehir arasındaki mesafeyi sonsuz yap
             for (int j = 0; j < cityCount; j++) {
                 if (i == j) {
                     timeMatrix[i][j] = 0; // Kendisine mesafe 0
@@ -18,9 +19,7 @@ public class CountryMap {
             }
         }
     }
-    public void setCity(int index, String name) {
-        cities[index] = new City(name);
-    }
+    
     public void addRoute(String city1, String city2, int time) {
         int index1 = findCityIndex(city1);
         int index2 = findCityIndex(city2);
@@ -38,7 +37,10 @@ public class CountryMap {
                 return i;
             }
         }
-        return -1;
+        return -1;// bulmazsa -1 döndür
+    }
+    public void setCity(int index, String name) {
+        cities[index] = new City(name);
     }
     public int[][] getTimeMatrix() {
         return timeMatrix;

@@ -28,5 +28,10 @@ public class Main {
              String[] cities = fileScanner.nextLine().trim().split("\\s+");
              int startCity = map.findCityIndex(cities[0]);
              int endCity = map.findCityIndex(cities[1]);
-             
+            }
+        }
+    }
+
+
+
  

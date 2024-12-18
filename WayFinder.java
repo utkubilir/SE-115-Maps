@@ -1,3 +1,5 @@
 public class WayFinder {
-// en hızlı yolu bulma algoritması
+    private int[] shortestTime;
+    private boolean[] visited;
+    private int[] previous;
 }
