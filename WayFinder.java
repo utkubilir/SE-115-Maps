@@ -44,4 +44,13 @@ public class WayFinder {
 
         printResult(map, startCity, endCity, shortestTime[endCity]);//print the result function
     }
+    private void printResult(CountryMap map, int start, int end, int totalTime) {
+        if (totalTime == Integer.MAX_VALUE) {
+            System.out.println("No path exists.");
+        } else {
+            String path = buildPath(map, start, end);
+            System.out.println("Fastest Way: " + path);
+            System.out.println("Total Time: " + totalTime + " min");
+        }
+    }
 }
