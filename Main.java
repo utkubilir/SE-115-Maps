@@ -28,6 +28,15 @@ public class Main {
              String[] cities = fileScanner.nextLine().trim().split("\\s+");
              int startCity = map.findCityIndex(cities[0]);
              int endCity = map.findCityIndex(cities[1]);
+             WayFinder wayFinder = new WayFinder();
+            wayFinder.findFastestPath(map, startCity, endCity);
+
+            fileScanner.close();//şart
+            
+        } catch (IOException e) {
+            System.err.println("Error: Unable to read file - " + e.getMessage());
+        } finally {
+            inputScanner.close();
             }
         }
     }
