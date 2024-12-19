@@ -53,4 +53,14 @@ public class WayFinder {
             System.out.println("Total Time: " + totalTime + " min");
         }
     }
+
+    private String buildPath(CountryMap map, int start, int end) {//build the path function
+        if (end == start) {
+            return map.getCities()[start].getName();
+        } else if (previous[end] == -1) {
+            return "No path";
+        } else {
+            return buildPath(map, start, previous[end]) + " -> " + map.getCities()[end].getName();
+        }
+    }
 }
