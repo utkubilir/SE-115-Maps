@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner inputScanner = new Scanner(System.in);
-        System.out.println("Enter the absolute path of the input file:");
-        String filePath = inputScanner.nextLine();
-
+        if (args.length < 1) {
+            System.err.println("Error: Please provide the input file path as a command-line argument.");
+            return;
+        }
+        String filePath = args[0];
         try {
             Path path = Paths.get(filePath);
             Scanner fileScanner = new Scanner(path.toFile());
