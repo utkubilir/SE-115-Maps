@@ -2,8 +2,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class WayFinder {
-    private int[] shortestTime;
-    private boolean[] visited;
+    private int[] shortestTime; 
+    private boolean[] visited; 
     private int[] previous;
 
     public void findFastestPathAndWriteResults(CountryMap map, int startCity, int endCity, String outputFilePath) {

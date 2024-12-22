@@ -1,2 +1,2 @@
-Fastest Way: A -> K
-Total Time: 95 min
+Fastest Way: A -> F
+Total Time: 13 min

@@ -17,14 +17,21 @@ public class Main {
             int lineNumber = 1;
             boolean hasErrors = false;
 
-            String cityCountLine = fileScanner.nextLine().trim();
-            int cityCount;
-            try {
-                cityCount = Integer.parseInt(cityCountLine);
-            } catch (NumberFormatException e) {
-                System.err.println("Error Line: " + lineNumber + " Invalid city count.");
+            int cityCount = 0;
+            if (fileScanner.hasNextLine()) {
+                String cityCountLine = fileScanner.nextLine().trim();
+                lineNumber++;
+                try {
+                    cityCount = Integer.parseInt(cityCountLine);
+                } catch (NumberFormatException e) {
+                    System.err.println("Error Line: " + lineNumber + " Invalid city count.");
+                    return;
+                }
+            } else {
+                System.err.println("Error Line: " + lineNumber + " Missing city count.");
                 return;
             }
+
             CountryMap map = new CountryMap(cityCount);
 
             if (fileScanner.hasNextLine()) {
@@ -45,9 +52,10 @@ public class Main {
 
             int routeCount = 0;
             if (fileScanner.hasNextLine()) {
+                String routeCountLine = fileScanner.nextLine().trim();
+                lineNumber++;
                 try {
-                    routeCount = Integer.parseInt(fileScanner.nextLine().trim());
-                    lineNumber++;
+                    routeCount = Integer.parseInt(routeCountLine);
                 } catch (NumberFormatException e) {
                     System.err.println("Error Line: " + lineNumber + " Invalid route count.");
                     return;
@@ -79,7 +87,6 @@ public class Main {
                     return;
                 }
             }
-
             if (fileScanner.hasNextLine()) {
                 String[] cities = fileScanner.nextLine().trim().split("\\s+");
                 lineNumber++;
@@ -90,21 +97,15 @@ public class Main {
                     int startCity = map.findCityIndex(cities[0]);
                     int endCity = map.findCityIndex(cities[1]);
 
-                    if (startCity == -1 || endCity == -1) {
-                        System.err.println("Error: Start or end city does not exist.");
-                        return;
+                    if (!hasErrors) {
+                        WayFinder wayFinder = new WayFinder();
+                        wayFinder.findFastestPathAndWriteResults(map, startCity, endCity, "output.txt");
+                        System.out.println("File read is successful!");
                     }
-
-                    WayFinder wayFinder = new WayFinder();
-                    wayFinder.findFastestPathAndWriteResults(map, startCity, endCity, "output.txt");
                 }
             } else {
                 System.err.println("Error Line: " + lineNumber + " Missing start and end cities.");
                 return;
-            }
-
-            if (!hasErrors) {
-                System.out.println("File read is successful!");
             }
 
             fileScanner.close();
