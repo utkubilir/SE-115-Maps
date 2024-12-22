@@ -1,9 +1,12 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class WayFinder {
     private int[] shortestTime;
     private boolean[] visited;
     private int[] previous;
-    
-    public void findFastestPath(CountryMap map, int startCity, int endCity) {
+
+    public void findFastestPathAndWriteResults(CountryMap map, int startCity, int endCity, String outputFilePath) {
         int cityCount = map.getCityCount();
         shortestTime = new int[cityCount];
         visited = new boolean[cityCount];
@@ -28,7 +31,7 @@ public class WayFinder {
                 }
             }
 
-            if (currentCity == -1) break; 
+            if (currentCity == -1) break;
             visited[currentCity] = true;
 
             for (int j = 0; j < cityCount; j++) {
@@ -42,19 +45,24 @@ public class WayFinder {
             }
         }
 
-        printResult(map, startCity, endCity, shortestTime[endCity]);//print the result function
-    }
-    private void printResult(CountryMap map, int start, int end, int totalTime) {
-        if (totalTime == Integer.MAX_VALUE) {
-            System.out.println("No path exists.");
-        } else {
-            String path = buildPath(map, start, end);
-            System.out.println("Fastest Way: " + path);
-            System.out.println("Total Time: " + totalTime + " min");
+        try (FileOutputStream fos = new FileOutputStream(outputFilePath)) {
+            if (shortestTime[endCity] == Integer.MAX_VALUE) {
+                String result = "No path exists.";
+                System.out.println(result);
+                fos.write(result.getBytes());
+            } else {
+                String path = buildPath(map, startCity, endCity);
+                String result = "Fastest Way: " + path + "\nTotal Time: " + shortestTime[endCity] + " min";
+                System.out.println(result);
+                fos.write(result.getBytes());
+            }
+            System.out.println("Results saved to: " + outputFilePath);
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
         }
     }
 
-    private String buildPath(CountryMap map, int start, int end) {//build the path function
+    private String buildPath(CountryMap map, int start, int end) {
         if (end == start) {
             return map.getCities()[start].getName();
         } else if (previous[end] == -1) {
