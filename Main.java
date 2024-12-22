@@ -39,7 +39,7 @@ public class Main {
         } catch (IOException e) {
             System.err.println("Error: Unable to read file - " + e.getMessage());
         } finally {
-            inputScanner.close();
+            System.out.println("Program finished.");
         }
     }
     }
